@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timer</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+
+<body>
+    <div id="app">
+        <Timer />
+    </div>
+    <template id="timer">
+        <div>
+            I am {{name}}
+        </div>
+    </template>
+    <script>
+        const template = document.getElementById("timer").innerHTML;
+        const Timer = {
+            data() {
+                return {
+                    name: "Timer"
+                }
+            },
+            template
+        }
+        new Vue({
+            el: '#app',
+            components: {
+                'Timer': Timer,
+            }
+        })
+
+    </script>
+</body>
+
+</html>
+<style>
+
+</style>

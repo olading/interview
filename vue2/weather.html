@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+
+<body>
+    <div id="app">
+        <Weather />
+    </div>
+    <template id="demo">
+        <div>
+            I am {{name}}
+        </div>
+    </template>
+    <template id="weather">
+        <div>
+            I am {{name}}
+            <br />
+            <Demo />
+        </div>
+    </template>
+    <script>
+        var cities = [{
+            name: "北京",
+            date: "2022-02-16",
+            weather: "晴",
+            temperature: "10~20度",
+            nextWeatherTemperature: []
+        }, {
+            name: "深圳",
+            date: "2022-02-16",
+            weather: "雨",
+            temperature: "18~20度",
+            nextWeatherTemperature: []
+        }]
+        const randWeatherTemperatures = () => {
+            const weather = ['晴', '阴', '风', '雨']
+            const temperature = ['12~13度', '11~20度', '12~20度', '10~20度']
+            var r = []
+            for (var i = 0; i < 15; i++) {
+                var index = (Math.random() * 1000) % 4
+                index = Math.abs(parseInt(index))
+                r.push({
+                    weather: weather[index],
+                    temperature: temperature[index]
+                })
+            }
+
+            return r
+        }
+        cities[0].nextWeatherTemperature = randWeatherTemperatures()
+        cities[1].nextWeatherTemperature = randWeatherTemperatures()
+        console.log(cities)
+
+        const Demo = {
+            data() {
+                return {
+                    name: "Demo"
+                }
+            },
+            template: document.getElementById("demo").innerHTML
+        }
+        const Weather = {
+            components: {
+                "Demo": Demo
+            },
+            data() {
+                return {
+                    name: "Weather"
+                }
+            },
+            template: document.getElementById("weather").innerHTML
+        }
+        new Vue({
+            el: '#app',
+            components: {
+                'Weather': Weather,
+            }
+        })
+
+    </script>
+</body>
+
+</html>
+<style>
+
+</style>
